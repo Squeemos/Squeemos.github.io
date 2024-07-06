@@ -11,17 +11,26 @@ import ListItemText from '@mui/material/ListItemText';
 import { TeamCaptain } from './pages/TeamCaptain';
 import { EloDraft } from './pages/EloDraft';
 import { Graphs } from './pages/Graphs';
+import { Settings } from './pages/Settings';
+import { CoinFlip } from './pages/CoinFlip';
+import { RouletteWheel } from './pages/RouletteWheel';
 import { ReactComponent as GraphLogo } from './assets/svgs/barchart.svg';
 import { ReactComponent as CaptainLogo } from './assets/svgs/captain.svg';
 import { ReactComponent as EloLogo } from './assets/svgs/elodraft.svg';
 import { ReactComponent as OpenDrawerLogo } from './assets/svgs/opendrawer.svg';
+import { ReactComponent as CoinFlipLogo } from './assets/svgs/coinflip.svg';
+import { ReactComponent as RouletteWheelLogo } from './assets/svgs/roulette.svg';
+import { ReactComponent as SettingsLogo } from './assets/svgs/settings.svg';
 import './PageManager.css';
 
 const icons = {
   'Graphs': <GraphLogo className='drawerIcon'/>,
   'Team Captains': <CaptainLogo className='drawerIcon'/>,
   'Elo Draft': <EloLogo className='drawerIcon'/>,
-  'Open Drawer': <OpenDrawerLogo className='drawerIcon'/>
+  'Open Drawer': <OpenDrawerLogo className='drawerIcon'/>,
+  'Coin Flip': <CoinFlipLogo className='drawerIcon'/>,
+  'Roulette Wheel': <RouletteWheelLogo className='drawerIcon'/>,
+  'Settings': <SettingsLogo className='drawerIcon'/>,
 };
 
 export const PageManager = () => {
@@ -40,6 +49,12 @@ export const PageManager = () => {
         return <TeamCaptain />;
       case 'Elo Draft':
         return <EloDraft />;
+      case 'Settings':
+        return <Settings />;
+      case 'Coin Flip':
+        return <CoinFlip />;
+      case 'Roulette Wheel':
+        return <RouletteWheel />;
       default:
         return <h1>Hewwo :3</h1>;
     }
@@ -49,7 +64,7 @@ export const PageManager = () => {
     console.info(props);
 
     return (
-    <List>
+    <List sx={{ ...props.sx }}>
         {props.pageNames.map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
@@ -67,10 +82,12 @@ export const PageManager = () => {
   }
 
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 250, position: 'relative' }} role="presentation" onClick={toggleDrawer(false)}>
         <MiniDrawer pageNames={['Graphs', 'Team Captains', 'Elo Draft']} />
         <Divider />
         <MiniDrawer pageNames={['Coin Flip', 'Roulette Wheel']} />
+        <Divider />
+        <MiniDrawer pageNames={['Settings']} />
     </Box>
   );
 
