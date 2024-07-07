@@ -8,12 +8,15 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+
 import { TeamCaptain } from './pages/TeamCaptain';
 import { EloDraft } from './pages/EloDraft';
 import { Graphs } from './pages/Graphs';
 import { Settings } from './pages/Settings';
 import { CoinFlip } from './pages/CoinFlip';
 import { RouletteWheel } from './pages/RouletteWheel';
+import { PlayerManagement } from './pages/PlayerManager';
+
 import { ReactComponent as GraphLogo } from './assets/svgs/barchart.svg';
 import { ReactComponent as CaptainLogo } from './assets/svgs/captain.svg';
 import { ReactComponent as EloLogo } from './assets/svgs/elodraft.svg';
@@ -21,6 +24,8 @@ import { ReactComponent as OpenDrawerLogo } from './assets/svgs/opendrawer.svg';
 import { ReactComponent as CoinFlipLogo } from './assets/svgs/coinflip.svg';
 import { ReactComponent as RouletteWheelLogo } from './assets/svgs/roulette.svg';
 import { ReactComponent as SettingsLogo } from './assets/svgs/settings.svg';
+import { ReactComponent as PlayerManagementLogo } from './assets/svgs/playermanagement.svg';
+
 import './PageManager.css';
 
 const icons = {
@@ -31,11 +36,17 @@ const icons = {
   'Coin Flip': <CoinFlipLogo className='drawerIcon'/>,
   'Roulette Wheel': <RouletteWheelLogo className='drawerIcon'/>,
   'Settings': <SettingsLogo className='drawerIcon'/>,
+  'Player Management': <PlayerManagementLogo className='drawerIcon'/>
 };
 
 export const PageManager = () => {
   const [open, setOpen] = useState(false);
-  const [page, setPage] = useState('Graphs');
+  const [page, setPage] = useState('Player Management');
+  const [data, setData] = useState(['Add player']);
+  const fullSetData = (newData) => {
+    setData(newData);
+    localStorage.setItem('data', data);
+  }
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -44,7 +55,7 @@ export const PageManager = () => {
   const renderPage = () => {
     switch(page) {
       case 'Graphs':
-        return <Graphs />;
+        return <Graphs data={data} />;
       case 'Team Captains':
         return <TeamCaptain />;
       case 'Elo Draft':
@@ -55,17 +66,17 @@ export const PageManager = () => {
         return <CoinFlip />;
       case 'Roulette Wheel':
         return <RouletteWheel />;
+      case 'Player Management':
+        return <PlayerManagement data={data} setData={fullSetData}/>;
       default:
         return <h1>Hewwo :3</h1>;
     }
   }
 
-  const MiniDrawer = (props) => {
-    console.info(props);
-
+  const MiniDrawer = ({pageNames}) => {
     return (
-    <List sx={{ ...props.sx }}>
-        {props.pageNames.map((text, index) => (
+    <List>
+        {pageNames.map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -83,7 +94,7 @@ export const PageManager = () => {
 
   const DrawerList = (
     <Box sx={{ width: 250, position: 'relative' }} role="presentation" onClick={toggleDrawer(false)}>
-        <MiniDrawer pageNames={['Graphs', 'Team Captains', 'Elo Draft']} />
+        <MiniDrawer pageNames={['Player Management', 'Graphs', 'Team Captains', 'Elo Draft']} />
         <Divider />
         <MiniDrawer pageNames={['Coin Flip', 'Roulette Wheel']} />
         <Divider />
@@ -98,9 +109,11 @@ export const PageManager = () => {
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
-        {
-            renderPage()
-        }
+    </div>
+    <div>
+      {
+        renderPage()
+      }
     </div>
     </>
   );
