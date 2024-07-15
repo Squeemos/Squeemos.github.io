@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.496428c2.css",
-    "main.js": "/static/js/main.636015f5.js",
+    "main.js": "/static/js/main.08d1d3d1.js",
     "static/js/453.b03e3c98.chunk.js": "/static/js/453.b03e3c98.chunk.js",
     "static/media/coinflip.svg": "/static/media/coinflip.d7e4f6d73649895e612358e26dd0f7b4.svg",
     "static/media/roulette.svg": "/static/media/roulette.c7df4cc146fb468603446ba40404dbd3.svg",
@@ -9,16 +9,17 @@
     "static/media/settings.svg": "/static/media/settings.48d26fd564a7b689be8a8e267102fa39.svg",
     "static/media/barchart.svg": "/static/media/barchart.09913d1818e18fcc8761152e3259ef9e.svg",
     "static/media/elodraft.svg": "/static/media/elodraft.502279507700d2a4cd12e2bb09ce2c0c.svg",
+    "static/media/removeplayer.svg": "/static/media/removeplayer.6df90260d22f05d2373dfe90a495b672.svg",
     "static/media/addplayer.svg": "/static/media/addplayer.cc919ca136f4bf2886682fc609c5f5e2.svg",
     "static/media/captain.svg": "/static/media/captain.14c706e6f6133f133d5bf854d417fc68.svg",
     "static/media/opendrawer.svg": "/static/media/opendrawer.f6a8becf95b7555f29cf6e8a458a15f0.svg",
     "index.html": "/index.html",
     "main.496428c2.css.map": "/static/css/main.496428c2.css.map",
-    "main.636015f5.js.map": "/static/js/main.636015f5.js.map",
+    "main.08d1d3d1.js.map": "/static/js/main.08d1d3d1.js.map",
     "453.b03e3c98.chunk.js.map": "/static/js/453.b03e3c98.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.496428c2.css",
-    "static/js/main.636015f5.js"
+    "static/js/main.08d1d3d1.js"
   ]
 }
