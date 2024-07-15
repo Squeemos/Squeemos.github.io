@@ -8,6 +8,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import { v4 as uuidv4 } from 'uuid';
 
 import { TeamCaptain } from './pages/TeamCaptain';
 import { EloDraft } from './pages/EloDraft';
@@ -39,13 +40,17 @@ const icons = {
   'Player Management': <PlayerManagementLogo className='drawerIcon'/>
 };
 
+const defaultData = {
+  [uuidv4()]: 'Enter a player name',
+};
+
 export const PageManager = () => {
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState('Player Management');
-  const [data, setData] = useState(['Add player']);
+  const [data, setData] = useState(JSON.parse(localStorage.getItem('data')) || defaultData);
   const fullSetData = (newData) => {
     setData(newData);
-    localStorage.setItem('data', data);
+    localStorage.setItem('data', JSON.stringify(newData));
   }
 
   const toggleDrawer = (newOpen) => () => {
