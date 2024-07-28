@@ -1,83 +1,48 @@
-import React, { useState } from "react";
-import Box from '@mui/material/Box';
+import React, { useState } from 'react';
+
+import Card from '@mui/material/Card';
+import { CardContent } from '@mui/material';
+import { CardActions } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
+
 
 import { ReactComponent as AddPlayerLogo } from '../assets/svgs/addplayer.svg';
 import { ReactComponent as RemovePlayerLogo } from '../assets/svgs/removeplayer.svg';
 
 import './PlayerManagerCard.css';
 
-const textFieldOptions = {
-  mt: '32px',
-  mb: '32px',
-};
-
-const buttonOptions = {
-  width: '64px',
-  height: '64px',
-  display: 'flex',
-  justifyContent: 'center',
-  margin: '4px 4px 12px 4px',
-}
-
-const addPlayerOptions = {
-  ...buttonOptions,
-  backgroundColor: '#11c21d',
-};
-
-const removePlayerOptions = {
-  ...buttonOptions,
-  backgroundColor: '#FF0000',
-};
-
-const playerOptions = {
-  width: '300px',
-  height: '200px',
-  backgroundColor: '#1976d2',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'left',
-};
-
 export const PlayerManagerCard = ({ player, addPlayer, removePlayer, playerKey, canDelete, updatePlayer }) => {
-  console.debug(player);
   const handleRemovePlayer = () => {
     removePlayer(playerKey);
   }
 
   return (
-    <Box sx={playerOptions}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <TextField
-            label="Player Name"
-            variant="filled"
-            fullWidth sx={textFieldOptions}
-            value={player}
-            onChange={(e) => updatePlayer(playerKey, e.target.value)}
-            InputProps={{
-              style: { color: '#ffffff' },
-            }}
-          />
-        </Grid>
-        <Grid item xs={4}>
-          <div onClick={handleRemovePlayer} style={{ display: canDelete ? 'flex' : 'none', justifyContent: 'left' }}>
-            <Box sx={removePlayerOptions} alignContent={'center'} justifyContent={'center'}>
-              <RemovePlayerLogo className='addPlayer'/>
-            </Box>
-          </div>
-        </Grid>
-        <Grid item xs={4}>
-        </Grid>
-        <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'right'}}>
-          <div onClick={addPlayer} style={{ display: 'flex', justifyContent: 'center' }}>
-            <Box sx={addPlayerOptions} alignContent={'center'} justifyContent={'center'}>
-              <AddPlayerLogo className='addPlayer'/>
-            </Box>
-          </div>
-        </Grid>
-      </Grid>
-    </Box>
+    <Card className='playerCard' key={playerKey}>
+      <CardContent key={playerKey + 'content'}>
+        <TextField
+          label='Player name'
+          variant='filled'
+          value={player}
+          onChange={(e) => updatePlayer(playerKey, e.target.value)}
+        />
+      </CardContent>
+      <CardActions key={playerKey + 'actions'}>
+        <div
+          key={playerKey + 'remove'}
+          className='buttonContainer removePlayer'
+          style={{ visibility: canDelete ? 'visible' : 'hidden' }}
+          children={<RemovePlayerLogo className='buttonOptions removePlayer' />}
+          onClick={handleRemovePlayer}
+        />
+        <div
+          key={playerKey + 'add'}
+          className='buttonContainer addPlayer'
+          children={<AddPlayerLogo className='buttonOptions addPlayer' />}
+          onClick={addPlayer}
+        />
+      </CardActions>
+    </Card>
   );
 };
+
+export default PlayerManagerCard;

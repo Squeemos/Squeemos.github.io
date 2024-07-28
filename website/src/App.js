@@ -1,11 +1,9 @@
 import './App.css';
-import { PageManager } from './PageManager';
+import PageManager from './PageManager';
 
 function App() {
   return (
-    <>
-      <PageManager />
-    </>
+    <PageManager />
   );
 }
 

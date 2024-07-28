@@ -10,13 +10,13 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { v4 as uuidv4 } from 'uuid';
 
-import { TeamCaptain } from './pages/TeamCaptain';
-import { EloDraft } from './pages/EloDraft';
-import { Graphs } from './pages/Graphs';
-import { Settings } from './pages/Settings';
-import { CoinFlip } from './pages/CoinFlip';
-import { RouletteWheel } from './pages/RouletteWheel';
-import { PlayerManagement } from './pages/PlayerManager';
+import TeamCaptain from './pages/TeamCaptain';
+import EloDraft from './pages/EloDraft';
+import Graphs from './pages/Graphs';
+import Settings from './pages/Settings';
+import CoinFlip from './pages/CoinFlip';
+import RouletteWheel from './pages/RouletteWheel';
+import PlayerManagement from './pages/PlayerManager';
 
 import { ReactComponent as GraphLogo } from './assets/svgs/barchart.svg';
 import { ReactComponent as CaptainLogo } from './assets/svgs/captain.svg';
@@ -62,7 +62,7 @@ export const PageManager = () => {
       case 'Graphs':
         return <Graphs data={data} />;
       case 'Team Captains':
-        return <TeamCaptain />;
+        return <TeamCaptain data={data}/>;
       case 'Elo Draft':
         return <EloDraft />;
       case 'Settings':
@@ -80,16 +80,12 @@ export const PageManager = () => {
 
   const MiniDrawer = ({pageNames}) => {
     return (
-    <List>
+      <List>
         {pageNames.map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {
-                    icons[text]
-                }
-              </ListItemIcon>
-              <ListItemText primary={text} onClick={() => setPage(text)}/>
+            <ListItemButton onClick={() => setPage(text)}>
+              <ListItemIcon children={icons[text]} />
+              <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -109,17 +105,17 @@ export const PageManager = () => {
 
   return (
     <>
-    <div>
-      <Button onClick={toggleDrawer(true)} startIcon={icons['Open Drawer']}>Select Page</Button>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
-        {DrawerList}
-      </Drawer>
-    </div>
-    <div>
-      {
-        renderPage()
-      }
-    </div>
+      <div>
+        <Button onClick={toggleDrawer(true)} startIcon={icons['Open Drawer']}>Select Page</Button>
+        <Drawer open={open} onClose={toggleDrawer(false)}>
+          {DrawerList}
+        </Drawer>
+      </div>
+      <div>
+        { renderPage() }
+      </div>
     </>
   );
-}
+};
+
+export default PageManager;

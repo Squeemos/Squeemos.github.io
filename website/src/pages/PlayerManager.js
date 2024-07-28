@@ -1,13 +1,14 @@
 import React from "react";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
 import { v4 as uuidv4 } from 'uuid';
 
-import { PlayerManagerCard } from '../pagecomponents/PlayerManagerCard';
+import PlayerManagerCard from '../pagecomponents/PlayerManagerCard';
+import { Typography } from "@mui/material";
 
 export const PlayerManagement = ({ data, setData }) => {
   const addPlayer = () => {
-    console.debug("Adding player");
     const newId = uuidv4();
     const newData = {
       ...data,
@@ -19,20 +20,14 @@ export const PlayerManagement = ({ data, setData }) => {
   };
 
   const updatePlayer = (player, name) => {
-    console.debug("Updating player");
-    console.debug(player);
-    console.debug(name);
     const newData = { ...data };
     newData[player] = name;
     setData(newData);
   }
 
   const removePlayer = (player) => {
-    console.debug("Removing player");
-    console.debug(player);
     const newData = { ...data };
     delete newData[player];
-    console.info(newData);
     setData(newData);
   };
 
@@ -40,8 +35,8 @@ export const PlayerManagement = ({ data, setData }) => {
 
   const createGridItems = Object.keys(data).map((key) => {
     return (
-      <Grid item xs='auto' key={key}>
         <PlayerManagerCard
+          key={key}
           player={data[key]}
           playerKey={key}
           addPlayer={addPlayer}
@@ -49,15 +44,19 @@ export const PlayerManagement = ({ data, setData }) => {
           canDelete={canDelete}
           updatePlayer={updatePlayer}
         />
-      </Grid>
     );
   });
 
   return (
-    <Box sx={{ padding: 2, backgroundColor: '#e0e0e0', display: 'flex', justifyContent: 'center' }}>
-      <Grid container spacing={2} columns={5}>
-        {createGridItems}
-      </Grid>
-    </Box>
+    <>
+      <Typography variant='h4' sx={{ textAlign: 'center', margin: '2% 0' }}>Player Management (yes ik the right side is phat, i'll fix it one day)</Typography>
+      <Box sx={{ padding: 2, backgroundColor: '#e0e0e0', width: '80%', margin: '0 10%' }}>
+        <Stack spacing={{ xs: 2 }} useFlexGap flexWrap="wrap" direction="row" justifyContent='flex-start'>
+          {createGridItems}
+        </Stack>
+      </Box>
+    </>
   );
 };
+
+export default PlayerManagement;

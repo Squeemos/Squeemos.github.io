@@ -8,3 +8,5 @@ export const EloDraft = () => {
     </>
   );
 };
+
+export default EloDraft;

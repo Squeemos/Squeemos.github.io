@@ -7,3 +7,5 @@ export const Graphs = ({ data }) => {
         </>
     );
 };
+
+export default Graphs;
